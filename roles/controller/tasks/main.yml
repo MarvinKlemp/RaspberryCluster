@@ -8,7 +8,7 @@
 
 - name: configure dnsmasq
   become: true
-  action: template src=dnsmasq.conf dest=/etc/dnsmasq.conf
+  action: copy src=dnsmasq.conf dest=/etc/dnsmasq.conf
 
 - name: configure dnsmasq hosts
   become: true

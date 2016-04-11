@@ -34,7 +34,7 @@
 
 - name: override munge configs
   become: true
-  action: template src=munge dest=/etc/default/munge
+  action: copy src=munge dest=/etc/default/munge
   notify:
     - restart munge
 

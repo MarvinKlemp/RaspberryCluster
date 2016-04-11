@@ -11,4 +11,4 @@
 
 - name: replace resolv.conf
   become: true
-  action: template src=resolv.conf dest=/etc/resolv.conf
+  action: copy src=resolv.conf dest=/etc/resolv.conf
