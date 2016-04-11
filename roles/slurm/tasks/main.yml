@@ -39,7 +39,9 @@
     - restart munge
 
 - name: start slurm
+  become: true
   action: service name=slurm-llnl state=started
 
 - name: start munge
+  become: true
   action: service name=munge state=started
