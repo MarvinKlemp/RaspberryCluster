@@ -12,7 +12,7 @@
 
 - name: configure dnsmasq hosts
   become: true
-  action: template src=dnsmasq.hosts dest=/etc/dnsmasq.hosts
+  action: template src=dnsmasq.hosts.j2 dest=/etc/dnsmasq.hosts
   notify: restart dnsmasq
 
 - name: Start dnsmasq

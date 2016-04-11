@@ -1,0 +1,3 @@
+{% for host in groups['node'] %}
+{{ host }} node{{loop.index0}}.hpc.local node{{loop.index0}}
+{% endfor %}
