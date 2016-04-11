@@ -1,0 +1,10 @@
+---
+- name: install common packages
+  become: true
+  action: apt pkg={{item}} state=installed
+  with_items:
+  - openmpi-bin
+  - openmpi-doc
+  - libopenmpi-dev
+  - hpcc
+  - mailutils

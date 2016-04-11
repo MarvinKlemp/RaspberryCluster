@@ -1,0 +1,32 @@
+---
+- name: install Slurm
+  become: true
+  action: apt pkg={{item}} state=installed
+  with_items:
+    - slurm-llnl
+    - slurm-llnl-doc
+    - slurm-llnl-torque
+
+- name: create slurm log file
+  become: true
+  action: file dest=/var/log/slurm_jobacct.log state=touch
+
+- name: change slurm log file ownership
+  become: true
+  action: file dest=/var/log/slurm_jobacct.log owner=slurm state=file
+
+- name: configure Slurm
+  become: true
+  action: template src=slurm.conf dest=/etc/slurm-llnl/slurm.conf owner=slurm
+  notify:
+  - restart slurml
+
+# Munge
+- name: install munge key
+  become: true
+  action: copy src=munge.key dest=/etc/munge/munge.key owner=munge group=munge mode=0600
+  notify:
+  - restart munge
+
+- name: start slurm
+  action: service name=slurm-llnl state=started

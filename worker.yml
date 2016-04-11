@@ -1,2 +1,6 @@
 ---
-- hosts: worker
+- name: configure worker nodes
+  hosts: worker
+  roles:
+    - common
+    - slurm

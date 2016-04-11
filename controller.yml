@@ -1,0 +1,6 @@
+---
+- name: configure head nodes
+  hosts: controller
+  roles:
+    - common
+    - slurm
