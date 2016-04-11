@@ -1,6 +1,8 @@
 ---
 - name: restart munge
+  become: true
   action: service name=munge state=restarted
 
 - name: restart slurm
+  become: true
   action: service name=slurm-llnl state=restarted

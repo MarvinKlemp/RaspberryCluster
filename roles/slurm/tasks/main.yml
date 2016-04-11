@@ -1,5 +1,5 @@
 ---
-- name: install Slurm
+- name: install slurm
   become: true
   action: apt pkg={{item}} state=installed
   with_items:
@@ -15,7 +15,7 @@
   become: true
   action: file dest=/var/log/slurm_jobacct.log owner=slurm state=file
 
-- name: configure Slurm
+- name: configure slurm
   become: true
   action: template src=slurm.conf dest=/etc/slurm-llnl/slurm.conf owner=slurm
   notify:
@@ -28,5 +28,18 @@
   notify:
   - restart munge
 
+- name: create munge user
+  become: true
+  user: name=munge group=munge
+
+- name: override munge configs
+  become: true
+  action: template src=munge dest=/etc/default/munge
+  notify:
+    - restart munge
+
 - name: start slurm
   action: service name=slurm-llnl state=started
+
+- name: start munge
+  action: service name=munge state=started

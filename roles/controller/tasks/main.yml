@@ -1,0 +1,20 @@
+---
+- name: install controller packages
+  become: true
+  action: apt pkg={{item}} state=installed
+  with_items:
+    - dnsmasq
+    - dnsutils
+
+- name: configure dnsmasq
+  become: true
+  action: template src=dnsmasq.conf dest=/etc/dnsmasq.conf
+
+- name: configure dnsmasq hosts
+  become: true
+  action: template src=dnsmasq.hosts dest=/etc/dnsmasq.hosts
+  notify: restart dnsmasq
+
+- name: Start dnsmasq
+  become: true
+  action: service name=dnsmasq state=started

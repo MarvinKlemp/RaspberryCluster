@@ -3,4 +3,5 @@
   hosts: controller
   roles:
     - common
+    - controller
     - slurm

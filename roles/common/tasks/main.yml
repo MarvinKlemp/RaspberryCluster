@@ -8,3 +8,7 @@
   - libopenmpi-dev
   - hpcc
   - mailutils
+
+- name: replace resolv.conf
+  become: true
+  action: template src=resolv.conf dest=/etc/resolv.conf
